@@ -1,7 +1,7 @@
 package s3
 
 import (
-  "aws"
+  "github.com/dkln/go-aws/aws"
 	"crypto/hmac"
 	"crypto/sha1"
 	"encoding/base64"

@@ -10,7 +10,7 @@
 package s3
 
 import (
-  "aws"
+  "github.com/dkln/go-aws/aws"
 	"bytes"
 	"encoding/xml"
 	"fmt"
