@@ -44,8 +44,8 @@ var retryingTransport = &ResilientTransport{
 /**
  *
  */
-func (self *ResilientTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	return self.tries(req)
+func (self *ResilientTransport) RoundTrip(request *http.Request) (*http.Response, error) {
+	return self.tries(request)
 }
 
 /**
@@ -54,14 +54,14 @@ func (self *ResilientTransport) RoundTrip(req *http.Request) (*http.Response, er
  * If a wait function is specified, wait that amount of time
  * In between requests.
  */
-func (self *ResilientTransport) tries(req *http.Request) (*http.Response, error) {
+func (self *ResilientTransport) tries(request *http.Request) (*http.Response, error) {
   var response *http.Response
   var error error
 
-	for try := 0; try < self.MaxTries; try += 1 {
-    response, error = self.RoundTrip(req)
+	for try := 0; try < self.MaxTries; try++ {
+    response, error = self.transport.RoundTrip(request)
 
-		if !self.ShouldRetry(req, response, error) {
+		if !self.ShouldRetry(request, response, error) {
 			break
 		}
 
